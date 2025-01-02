@@ -77,8 +77,17 @@
             transition: background-color 0.3s;
         }
 
-        .form-wrapper button:hover {
-            background-color: #a93226;
+        .form-wrapper button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .confirmation-message {
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+            display: none;
+            text-align: center;
         }
 
         footer {
@@ -103,15 +112,18 @@
     <section class="form-container">
         <div class="form-wrapper">
             <h1>Solicitação de Exclusão de Dados</h1>
-            <form action="https://n8n.semcodigo.edu.pl/webhook-test/xroaster" method="POST">
+            <form id="deletionForm" action="https://n8n.semcodigo.edu.pl/webhook/xroaster" method="POST">
                 <label for="email">E-mail de contato</label>
                 <input type="email" id="email" name="email" placeholder="Digite o e-mail cadastrado" required>
                 
                 <label for="reason">Motivo do pedido</label>
                 <textarea id="reason" name="reason" placeholder="Explique o motivo da solicitação" required></textarea>
                 
-                <button type="submit">Enviar Solicitação</button>
+                <button type="submit" id="submitButton">Enviar Solicitação</button>
             </form>
+            <div id="confirmationMessage" class="confirmation-message">
+                Sua solicitação foi enviada com sucesso!
+            </div>
         </div>
     </section>
 
@@ -120,6 +132,36 @@
         <a href="terms.html">Termos de Uso</a>
         <a href="changepassword.html">Alterar Senha</a>
     </footer>
+
+    <script>
+        document.getElementById('deletionForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Impede o envio imediato do formulário
+            
+            const submitButton = document.getElementById('submitButton');
+            const confirmationMessage = document.getElementById('confirmationMessage');
+            
+            // Desabilita o botão para evitar múltiplos envios
+            submitButton.disabled = true;
+
+            // Simula o envio do formulário
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Exibe a mensagem de confirmação
+                    confirmationMessage.style.display = 'block';
+                } else {
+                    alert('Ocorreu um erro ao enviar sua solicitação. Por favor, tente novamente.');
+                    submitButton.disabled = false; // Reativa o botão em caso de erro
+                }
+            })
+            .catch(() => {
+                alert('Não foi possível enviar a solicitação. Verifique sua conexão e tente novamente.');
+                submitButton.disabled = false; // Reativa o botão em caso de erro
+            });
+        });
+    </script>
 </body>
 </html>
-
