@@ -1,100 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>XROASTER</title>
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XROASTER - Torrador de Café Profissional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 400px;
-    }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
 
-    h1 {
-      font-size: 36px;
-      margin-bottom: 30px;
-      color: #333;
-    }
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url('https://images.unsplash.com/photo-1524350876685-274059332603?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
 
-    #slider-container {
-      width: 100%;
-      margin-bottom: 20px;
-    }
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+        }
 
-    #slider-label {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 5px;
-    }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
 
-    #value-input {
-      width: 100px;
-      font-size: 16px;
-      padding: 10px;
-      text-align: center;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
 
-    #result {
-      font-size: 16px;
-      margin-top: 30px;
-      color: #333;
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 5px;
-      white-space: pre-wrap;
-    }
-  </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #c0392b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #a93226;
+        }
+
+        .features {
+            padding: 80px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .feature-card h3 {
+            color: #c0392b;
+            margin-bottom: 15px;
+        }
+
+        .specs {
+            padding: 80px 20px;
+            background-color: white;
+        }
+
+        .specs-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .specs h2 {
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>XROASTER</h1>
-    <div id="slider-container">
-      <div id="slider-label">Milissegundos</div>
-      <input type="range" id="milliseconds-slider" min="1" max="1000" value="1" oninput="updateValue()">
-    </div>
-    <input type="number" id="value-input" min="1" max="1000" value="1" oninput="updateSlider()">
-    <div id="result"></div>
-  </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>XROASTER</h1>
+            <p>O torrador de café profissional que revoluciona a arte da torra</p>
+            <a href="#contact" class="cta-button">Solicite uma Demonstração</a>
+        </div>
+    </section>
 
-  <script>
-    function updateValue() {
-      let milliseconds = document.getElementById("milliseconds-slider").value;
-      document.getElementById("value-input").value = milliseconds;
-      calculateMinutes(milliseconds);
-    }
+    <section class="features">
+        <div class="features-container">
+            <div class="feature-card">
+                <h3>Controle Preciso</h3>
+                <p>Sistema de controle granular que permite ajustes precisos de temperatura e tempo para resultados consistentes.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Interface Intuitiva</h3>
+                <p>Painel de controle digital de fácil utilização com perfis de torra personalizáveis.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Resultados Profissionais</h3>
+                <p>Qualidade de torra excepcional para cafés especiais e blends únicos.</p>
+            </div>
+        </div>
+    </section>
 
-    function updateSlider() {
-      let milliseconds = document.getElementById("value-input").value;
-      document.getElementById("milliseconds-slider").value = milliseconds;
-      calculateMinutes(milliseconds);
-    }
+    <section class="specs">
+        <div class="specs-container">
+            <h2>Especificações Técnicas</h2>
+            <p>Capacidade: 1kg por batelada</p>
+            <p>Temperatura máxima: 230°C</p>
+            <p>Controle de granularidade: 1-1000ms</p>
+            <p>Tempo médio de torra: 12-15 minutos</p>
+        </div>
+    </section>
 
-    function calculateMinutes(milliseconds) {
-      let minutes = (milliseconds / 1000) / 60;
-      let json = { "GRANULARITY": minutes.toFixed(4) };
-      document.getElementById("result").innerHTML = `<code>{ "GRANULARITY": ${json.GRANULARITY} }</code>`;
-    }
-  </script>
+    <footer>
+        <a href="privacy.html">Política de Privacidade</a>
+        <a href="terms.html">Termos de Uso</a>
+        <a href="changepassword.html">Alterar Senha</a>
+    </footer>
 </body>
 </html>
